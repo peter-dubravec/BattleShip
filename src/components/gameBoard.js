@@ -7,11 +7,12 @@ function gameBoard() {
   let unavailibleSquares = [];
 
   let listOfShips = [
+    shipObj(1),
     shipObj(2),
     shipObj(2),
     shipObj(2),
-    shipObj(2),
-    shipObj(2),
+    shipObj(3),
+    shipObj(4),
   ];
 
   let getShipsOnBoard = () => {
@@ -26,7 +27,30 @@ function gameBoard() {
     }
   };
 
-  let _generateValues = (shipLength) => {
+  let _generateValuesVertical = (shipLength) => {
+    let xValue = Math.floor(Math.random() * 10);
+    let yValue = Math.floor(Math.random() * (10 - shipLength + 1));
+
+    let unavailibleString = JSON.stringify([unavailibleSquares]);
+
+    for (let i = 0; i <= shipLength; i++) {
+      let myValue = JSON.stringify([xValue, yValue + i]);
+      if (unavailibleString.indexOf(myValue) != -1) {
+        return _generateValuesVertical(shipLength);
+      }
+    }
+
+    for (let i = -1; i < shipLength + 1; i++) {
+      unavailibleSquares.push(
+        [xValue, yValue + i],
+        [xValue + 1, yValue + i],
+        [xValue - 1, yValue + i]
+      );
+    }
+    return [xValue, yValue];
+  };
+
+  let _generateValuesHorizontal = (shipLength) => {
     let xValue = Math.floor(Math.random() * (10 - shipLength + 1));
     let yValue = Math.floor(Math.random() * 10);
     let unavailibleString = JSON.stringify([unavailibleSquares]);
@@ -34,7 +58,7 @@ function gameBoard() {
     for (let i = 0; i <= shipLength; i++) {
       let myValue = JSON.stringify([xValue + i, yValue]);
       if (unavailibleString.indexOf(myValue) != -1) {
-        return _generateValues(shipLength);
+        return _generateValuesHorizontal(shipLength);
       }
     }
 
@@ -53,17 +77,33 @@ function gameBoard() {
     let yCoord;
 
     let cases = ["horizontal", "vertical"];
-    let randomNum = Math.floor(Math.random() * 2);
-
     for (let ship of listOfShips) {
-      [xCoord, yCoord] = _generateValues(ship.length);
+      let randomNum = Math.floor(Math.random() * 2);
+      let randomChoice = cases[randomNum];
       let squaresTakenByShip = [];
-      for (let i = 0; i < ship.length; i++) {
-        squaresTakenByShip.push([xCoord + i, yCoord]);
-      }
 
-      shipsOnBoard.push({ ship: ship, coordinates: squaresTakenByShip });
-      squaresTakenByShip = [];
+      switch (randomChoice) {
+        case "horizontal":
+          [xCoord, yCoord] = _generateValuesHorizontal(ship.length);
+          for (let i = 0; i < ship.length; i++) {
+            squaresTakenByShip.push([xCoord + i, yCoord]);
+          }
+
+          shipsOnBoard.push({ ship: ship, coordinates: squaresTakenByShip });
+
+          break;
+
+        case "vertical":
+          [xCoord, yCoord] = _generateValuesVertical(ship.length);
+
+          for (let i = 0; i < ship.length; i++) {
+            squaresTakenByShip.push([xCoord, yCoord + i]);
+          }
+
+          shipsOnBoard.push({ ship: ship, coordinates: squaresTakenByShip });
+
+          break;
+      }
     }
   };
 

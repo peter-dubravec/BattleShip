@@ -9,9 +9,7 @@ function gameLoop() {
   initialRender("player", player.gameBoard.getShipsOnBoard());
   initialRender("computer", computer.gameBoard.getShipsOnBoard());
 
-  let skuska = player.gameBoard.getShipsOnBoard();
-  let x = 4;
-  let y = 3;
+ 
 }
 
 gameLoop();

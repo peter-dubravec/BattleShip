@@ -32,8 +32,6 @@ function createBoard(belongsTo, displayShips) {
     rightPlayer.appendChild(gameBoard);
   } else {
     let rightComputer = document.querySelector(".rightcomputer");
-    // let computerDiv = document.querySelector(".computer");
-
     rightComputer.appendChild(gameBoard);
   }
 }

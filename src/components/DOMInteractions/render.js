@@ -1,4 +1,3 @@
-const attack = require("./renderAttack.js");
 
 function createBoard(belongsTo, displayShips) {
   let gameBoard = document.createElement("div");
@@ -19,7 +18,10 @@ function createBoard(belongsTo, displayShips) {
       }
 
       if (belongsTo == "computer") {
-        divRow.addEventListener("click", attack, { once: true });
+        if (displayShips.flat().some((val) => val[0] == x && val[1] == y)) {
+          divRow.classList.add("ship", "divRow-nohover");
+          divRow.classList.remove("divRow");
+        }
       }
       divColumn.appendChild(divRow);
     }
@@ -29,10 +31,10 @@ function createBoard(belongsTo, displayShips) {
 
   if (belongsTo == "player") {
     let rightPlayer = document.querySelector(".rightplayer");
-    rightPlayer.appendChild(gameBoard);
+    rightPlayer.append(gameBoard);
   } else {
     let rightComputer = document.querySelector(".rightcomputer");
-    rightComputer.appendChild(gameBoard);
+    rightComputer.append(gameBoard);
   }
 }
 

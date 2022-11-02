@@ -3,13 +3,6 @@ function shipObj(length) {
 
   let _shipSink = () => "Ship sunked";
 
-  let getHitScore = () => {
-    if (hitScore >= length) {
-      return _shipSink();
-    }
-
-    return hitScore;
-  };
   let hit = () => {
     hitScore = hitScore + 1;
 
@@ -18,7 +11,7 @@ function shipObj(length) {
     }
   };
 
-  return { hit, getHitScore, length };
+  return { hit, length };
 }
 
 module.exports = shipObj;

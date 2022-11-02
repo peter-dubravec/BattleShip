@@ -1,32 +1,33 @@
 const gameBoardObj = require("./gameBoard.js");
 
 function Player(isComputer = false) {
-  let gameBoard = gameBoardObj();
+  let gameBoard = gameBoardObj(isComputer);
+  let availibleCoordinates = [];
 
-  let firedShots = [];
-  gameBoard.placeShip();
+  if (isComputer == true) {
+    for (let y = 0; y <= 9; y++) {
+      for (let x = 0; x <= 9; x++) {
+        availibleCoordinates.push([x, y]);
+      }
+    }
+  }
 
   function _randomCoordinates() {
-    let xValue = Math.floor(Math.random() * 10);
-    let yValue = Math.floor(Math.random() * 10);
-    let result = firedShots.some((a) => a[0] === xValue && a[1] == yValue);
-    if (result) {
-      return _randomCoordinates();
-    }
-    return [xValue, yValue];
+    let randomNum = Math.floor(Math.random() * availibleCoordinates.length);
+    return availibleCoordinates.splice(randomNum, 1).flat();
   }
 
   let attack = (enemy, coordinates) => {
     if (isComputer == true) {
       let randomCoordinates = _randomCoordinates();
-      enemy.gameBoard.recieveAttack(randomCoordinates);
+      enemy.gameBoard.recieveAttack(randomCoordinates, enemy.isComputer);
       return;
     }
 
-    enemy.gameBoard.recieveAttack(coordinates);
+    enemy.gameBoard.recieveAttack(coordinates, enemy.isComputer);
   };
 
-  return { attack, gameBoard };
+  return { attack, gameBoard, isComputer };
 }
 
 module.exports = Player;

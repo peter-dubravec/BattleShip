@@ -1,18 +1,25 @@
 const shipObj = require("./shipObj.js");
+const createBoard = require("./DOMInteractions/render.js");
+const deletePlayerBoard = require("./DOMInteractions/deletePlayerBoard.js");
+const gameOver = require("./DOMInteractions/gameOver.js");
+const deleteBoards = require("./DOMInteractions/deleteBoards.js");
+const {
+  renderMissedShot,
+  renderHit,
+} = require("./DOMInteractions/renderChange.js");
 
-function gameBoard() {
-  let missedShots = [];
-  let shipsOnBoard = [];
+function gameBoard(isComputer) {
   let sunkenShips = [];
+  let shipsOnBoard = [];
   let unavailibleSquares = [];
 
   let listOfShips = [
     shipObj(1),
-    shipObj(2),
-    shipObj(2),
-    shipObj(2),
-    shipObj(3),
-    shipObj(4),
+    // shipObj(2),
+    // shipObj(2),
+    // shipObj(2),
+    // shipObj(3),
+    // shipObj(4),
   ];
 
   let getShipsOnBoard = () => {
@@ -21,7 +28,7 @@ function gameBoard() {
     return arrOfCoord;
   };
 
-  let checkGameEnd = () => {
+  let _checkGameEnd = () => {
     if (sunkenShips.length == shipsOnBoard.length) {
       return true;
     }
@@ -107,30 +114,62 @@ function gameBoard() {
     }
   };
 
-  let recieveAttack = (coordinates) => {
-    if (checkGameEnd()) return "Game over";
+  let recieveAttack = (coordinates, isComputer) => {
+    if (_checkGameEnd()) return;
 
     for (let obj of shipsOnBoard) {
-      if (obj.ship.getHitScore() == "Ship sunked") {
-        return "Ship sunked";
-      }
-
       for (let arr of obj.coordinates) {
         if (arr[0] == coordinates[0] && arr[1] == coordinates[1]) {
-          let result = obj.ship.hit();
-          if (result == "Ship sunked") {
+          if (obj.ship.hit() == "Ship sunked") {
             sunkenShips.push(obj);
-            if (checkGameEnd()) return "Game over";
-            return;
           }
-          return;
+
+          if (_checkGameEnd()) {
+            isComputer
+              ? renderHit("computer", coordinates)
+              : renderHit("player", coordinates);
+            return gameOver(isComputer);
+          }
+
+          return isComputer
+            ? renderHit("computer", coordinates)
+            : renderHit("player", coordinates);
         }
       }
     }
-    missedShots.push(coordinates);
+
+    return isComputer
+      ? renderMissedShot("computer", coordinates)
+      : renderMissedShot("player", coordinates);
   };
 
-  return { placeShip, recieveAttack, getShipsOnBoard };
+  let randomize = () => {
+    shipsOnBoard = [];
+    unavailibleSquares = [];
+    placeShip();
+    deletePlayerBoard();
+    createBoard("player", getShipsOnBoard());
+  };
+
+  let restart = () => {
+    shipsOnBoard = [];
+    unavailibleSquares = [];
+    sunkenShips = [];
+    placeShip();
+    deleteBoards(isComputer);
+    isComputer
+      ? createBoard("computer", getShipsOnBoard())
+      : createBoard("player", getShipsOnBoard());
+  };
+
+  (function initialBoard() {
+    placeShip();
+    isComputer
+      ? createBoard("computer", getShipsOnBoard())
+      : createBoard("player", getShipsOnBoard());
+  })();
+
+  return { placeShip, recieveAttack, getShipsOnBoard, randomize, restart };
 }
 
 module.exports = gameBoard;

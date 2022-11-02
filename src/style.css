@@ -26,6 +26,7 @@ h1 {
 }
 
 main {
+  position: relative;
   display: flex;
   gap: 80px;
   flex: 1;
@@ -61,8 +62,7 @@ footer {
   cursor: pointer;
 }
 
-
-.divRow:hover {
+.divRowcomputer:hover {
   background-color: rgb(172, 172, 172);
 }
 
@@ -101,4 +101,58 @@ div.labeltop {
 
 .ship {
   background-color: black;
+}
+
+.missedshot {
+  background-color: red !important;
+}
+
+.hit {
+  background-color: green !important;
+}
+.rightplayer {
+  position: relative;
+}
+.randombtn {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  margin-left: calc(50% - 50px);
+  bottom: -10px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px #999;
+}
+
+.randombtn:active {
+  box-shadow: 0 2px #999;
+  transform: translateY(2px);
+}
+
+.winner {
+  font-size: 24px;
+  position: absolute;
+  top: 30px;
+}
+
+.buttonrestart {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  bottom: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px #999;
+  display: none;
+}
+
+.buttonrestart:active {
+  box-shadow: 0 2px #999;
+  transform: translateY(2px);
 }

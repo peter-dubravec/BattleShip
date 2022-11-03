@@ -97,7 +97,7 @@ function gameBoard(isComputer) {
     let randomValue;
     let coord;
     let availibleSquaresStrg = JSON.stringify(availibleSqaures);
-    
+
     if (triedHorizontal.length == 0) {
       randomValue = Math.floor(Math.random() * availibleSqaures.length);
       coord = availibleSqaures[randomValue];

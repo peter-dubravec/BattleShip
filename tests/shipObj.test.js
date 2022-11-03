@@ -1,14 +1,7 @@
-const shipObj = require("../src/components/shipObj");
+const shipObj = require("../src/components/Objects/shipObj.js");
 
-test("If ship is hit, increase hit score", () => {
-  let myShip = shipObj();
-  myShip.hit();
-  expect(myShip.getHitScore()).toBe(1);
-});
-
-test("Test if ship will sink", () => {
+test("Ship that was hit at every availible point is sunked", () => {
   let myShip = shipObj(2);
-  myShip.hit();
   myShip.hit();
   expect(myShip.hit()).toBe("Ship sunked");
 });

@@ -1,4 +1,3 @@
-
 function createBoard(belongsTo, displayShips) {
   let gameBoard = document.createElement("div");
   gameBoard.classList.add("gameBoard" + belongsTo, "gameBoard");
@@ -17,12 +16,6 @@ function createBoard(belongsTo, displayShips) {
         }
       }
 
-      if (belongsTo == "computer") {
-        if (displayShips.flat().some((val) => val[0] == x && val[1] == y)) {
-          divRow.classList.add("ship", "divRow-nohover");
-          divRow.classList.remove("divRow");
-        }
-      }
       divColumn.appendChild(divRow);
     }
 

@@ -39,19 +39,17 @@ module.exports = merge(common, {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
 
-      //need to add some settings to make babel work, can't fetch
-
-      // {
-      //   test: /\.m?js$/,
-      //   exclude: /(node_modules|bower_components)/,
-      //   use: {
-      //     loader: "babel-loader",
-      //     options: {
-      //       presets: ["@babel/preset-env"],
-      //       plugins: ["@babel/plugin-proposal-object-rest-spread"],
-      //     },
-      //   },
-      // },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-proposal-object-rest-spread"],
+          },
+        },
+      },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",

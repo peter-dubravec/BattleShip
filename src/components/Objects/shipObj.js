@@ -11,7 +11,7 @@ function shipObj(length) {
     }
   };
 
-  return { hit, length };
+  return { hit };
 }
 
 module.exports = shipObj;

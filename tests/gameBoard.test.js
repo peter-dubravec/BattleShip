@@ -1,12 +1,12 @@
-const gameBoard = require("../src/components/gameBoard.js");
-const shipObj = require("../src/components/shipObj");
+// const gameBoard = require("../src/components/gameBoard.js");
+// const shipObj = require("../src/components/shipObj");
 
-test("If boat is added", () => {
-  let myShip = shipObj(2);
-  let gameBoard1 = gameBoard();
-  gameBoard1.placeShip(myShip);
-  expect(gameBoard1.getShipsOnBoard().length).toBe(1);
-});
+// test("If boat is added", () => {
+//   let myShip = shipObj(2);
+//   let gameBoard1 = gameBoard();
+//   gameBoard1.placeShip(myShip);
+//   expect(gameBoard1.getShipsOnBoard().length).toBe(1);
+// });
 
 // test("Ship gets hit at a specified location on gameBoard", () => {
 //   let myShip = shipObj(2);

@@ -10,6 +10,8 @@ body {
   background-color: black;
   display: flex;
   flex-direction: column;
+  min-width: 730px;
+  min-height: 770px;
 }
 
 header {
@@ -91,12 +93,14 @@ div.labeltop {
 
 .left {
   position: relative;
-  margin-top: 110px;
-}
-
-.labelside > div {
-  margin-bottom: 11px;
+  margin-top: 105px;
   margin-right: 3px;
+}
+.labelside {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-around;
 }
 
 .ship {
@@ -155,4 +159,32 @@ div.labeltop {
 .buttonrestart:active {
   box-shadow: 0 2px #999;
   transform: translateY(2px);
+}
+
+.logo {
+  position: absolute;
+  left: 30px;
+  width: 150px;
+  margin-left: 50px;
+}
+@media screen and (min-width: 1400px) {
+  body {
+    min-height: 950px;
+  }
+  .divRow-nohover,
+  .divRow {
+    width: 50px;
+    height: 50px;
+  }
+  .labelside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 500px;
+    font-size: 1.5em;
+  }
+
+  .labeltop {
+    font-size: 1.5em;
+  }
 }

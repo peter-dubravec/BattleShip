@@ -1,8 +1,8 @@
 require("./style.css");
-const playerObj = require("./components/Objects/playerObj.js");
+const PlayerObj = require("./components/Objects/PlayerObj.js");
 
-let player = playerObj(false);
-let computer = playerObj(true);
+let player = PlayerObj(false);
+let computer = PlayerObj(true);
 let randombtn = document.querySelector(".randombtn");
 randombtn.addEventListener("click", () => player.gameBoard.randomize());
 

@@ -1,4 +1,4 @@
-const shipObj = require("./shipObj.js");
+const ShipObj = require("./ShipObj.js");
 const createBoard = require("../DOMInteractions/render.js");
 const deletePlayerBoard = require("../DOMInteractions/deletePlayerBoard.js");
 const gameOver = require("../DOMInteractions/gameOver.js");
@@ -9,21 +9,23 @@ const {
   renderHit,
 } = require("../DOMInteractions/renderChange.js");
 
-function gameBoard(isComputer) {
+function GameBoard(isComputer) {
   let sunkenShips = [];
   let shipsOnBoard = [];
   let availibleSqaures = [];
 
   let _generateShips = () => {
     let listOfShips = [
-      shipObj(9),
-      // shipObj(3),
-      // shipObj(3),
-      // shipObj(2),
-      // shipObj(2),
-      // shipObj(1),
-      // shipObj(1),
-      // shipObj(1),
+      ShipObj(4),
+      ShipObj(3),
+      ShipObj(3),
+      ShipObj(2),
+      ShipObj(2),
+      ShipObj(2),
+      ShipObj(1),
+      ShipObj(1),
+      ShipObj(1),
+      ShipObj(1),
     ];
     return listOfShips;
   };
@@ -38,6 +40,7 @@ function gameBoard(isComputer) {
 
   let _getShipsOnBoard = () => {
     let arrOfCoord = shipsOnBoard.map((val) => val.coordinates);
+
     return arrOfCoord;
   };
 
@@ -69,7 +72,7 @@ function gameBoard(isComputer) {
       });
     }
 
-    for (let i = 0; i <= shipLength; i++) {
+    for (let i = 0; i < shipLength; i++) {
       let coordStringified = JSON.stringify([coord[0], coord[1] + i]);
       triedVertical.push(coord);
       if (availibleSquaresStrg.indexOf(coordStringified) == -1) {
@@ -90,6 +93,7 @@ function gameBoard(isComputer) {
         (val) => coord[0] - 1 != val[0] || coord[1] + i != val[1]
       );
     }
+
     return [coord[0], coord[1]];
   };
 
@@ -112,10 +116,10 @@ function gameBoard(isComputer) {
       });
     }
 
-    for (let i = 0; i <= shipLength; i++) {
+    for (let i = 0; i < shipLength; i++) {
       let coordStringified = JSON.stringify([coord[0] + i, coord[1]]);
+      triedHorizontal.push(coord);
       if (availibleSquaresStrg.indexOf(coordStringified) == -1) {
-        triedHorizontal.push(coord);
         return _generateValuesHorizontal(shipLength, triedHorizontal);
       }
     }
@@ -133,7 +137,7 @@ function gameBoard(isComputer) {
         (val) => coord[0] + i != val[0] || coord[1] - 1 != val[1]
       );
     }
-
+    console.log(coord[0]);
     return [coord[0], coord[1]];
   };
 
@@ -230,4 +234,4 @@ function gameBoard(isComputer) {
   return { recieveAttack, randomize, restart, checkGameEnd };
 }
 
-module.exports = gameBoard;
+module.exports = GameBoard;

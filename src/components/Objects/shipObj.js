@@ -1,4 +1,4 @@
-function shipObj(length) {
+function ShipObj(length) {
   let hitScore = 0;
 
   let _shipSink = () => "Ship sunked";
@@ -14,4 +14,4 @@ function shipObj(length) {
   return { hit, length };
 }
 
-module.exports = shipObj;
+module.exports = ShipObj;

@@ -1,7 +1,7 @@
-const gameBoardObj = require("./gameBoard.js");
+const GameBoardObj = require("./GameBoard.js");
 
 function Player(isComputer = false) {
-  let gameBoard = gameBoardObj(isComputer);
+  let gameBoard = GameBoardObj(isComputer);
   let availibleCoordinates = [];
 
   if (isComputer == true) {
